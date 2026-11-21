@@ -24,6 +24,11 @@ and kept the right to call it home.
 
 
 def main() -> None:
+    # Gate: the entry must be 1-280 Unicode code points, not only whitespace.
+    if not (1 <= len(POEM) <= 280):
+        raise ValueError(f"poem is {len(POEM)} code points, must be 1-280")
+    if not POEM.strip():
+        raise ValueError("poem must not be only whitespace")
     out_dir = "/output"
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
